@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="il.theguyd.mymvvmrivhitapp.viewmodel.InventorySettingsDialogViewModel" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="?attr/colorPrimary"
+            android:theme="@style/ThemeOverlay.AppCompat.ActionBar" />
+
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center">
+
+            <LinearLayout
+                android:layout_width="250dp"
+                android:layout_height="200dp"
+                android:layout_gravity="center"
+                android:orientation="vertical"
+                android:paddingTop="15dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="@string/column_number"
+                    android:textSize="20sp" />
+
+                <RadioGroup
+                    android:id="@+id/radioGroupColumns"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:orientation="horizontal">
+
+                    <RadioButton
+                        android:id="@+id/radio1"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:checked="@{viewModel.columns == 1}"
+                        android:onClick="@{() -> viewModel.setColumns(1)}"
+                        android:text="1"
+                        android:textAlignment="center" />
+
+                    <RadioButton
+                        android:id="@+id/radio2"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:checked="@{viewModel.columns == 2}"
+                        android:onClick="@{() -> viewModel.setColumns(2)}"
+                        android:text="2"
+                        android:textAlignment="center" />
+
+                    <RadioButton
+                        android:id="@+id/radio3"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:checked="@{viewModel.columns == 3}"
+                        android:onClick="@{() -> viewModel.setColumns(3)}"
+                        android:text="3"
+                        android:textAlignment="center" />
+
+                    <RadioButton
+                        android:id="@+id/radio4"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:checked="@{viewModel.columns == 4}"
+                        android:onClick="@{() -> viewModel.setColumns(4)}"
+                        android:text="4"
+                        android:textAlignment="center" />
+
+                </RadioGroup>
+
+                <com.google.android.material.divider.MaterialDivider
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="@string/info_card"
+                    android:textSize="20sp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <CheckBox
+                        android:id="@+id/chck1"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:checked="@{viewModel.infoOnCard.get(0) == true}"
+                        android:onClick="@{() -> viewModel.setInfoOnCard(0)}"
+                        android:text="@string/name"
+                        android:textAlignment="center" />
+
+                    <CheckBox
+                        android:id="@+id/chck2"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:checked="@{viewModel.infoOnCard.get(1) == true}"
+                        android:onClick="@{() -> viewModel.setInfoOnCard(1)}"
+                        android:text="@string/cost"
+                        android:textAlignment="center" />
+
+                    <CheckBox
+                        android:id="@+id/chck3"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:checked="@{viewModel.infoOnCard.get(2) == true}"
+                        android:onClick="@{() -> viewModel.setInfoOnCard(2)}"
+                        android:text="@string/quantity"
+                        android:textAlignment="center" />
+
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+
+        </FrameLayout>
+    </LinearLayout>
+</layout>

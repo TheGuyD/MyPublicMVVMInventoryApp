@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="purple_200">#FFBB86FC</color>
+    <color name="purple_500">#FF6200EE</color>
+    <color name="purple_700">#FF3700B3</color>
+    <color name="teal_200">#FF03DAC5</color>
+    <color name="teal_700">#FF018786</color>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="purple_gray">#EFDDF0</color>
+    <color name="shrine_pink_900">#880E4F</color>
+
+    <!-- New calm blueish-gray color definitions -->
+    <color name="blue_gray_500">#607D8B</color>  <!-- Blue Gray 500 -->
+    <color name="blue_gray_700">#455A64</color>  <!-- Blue Gray 700 -->
+    <color name="blue_gray_light">#CFD8DC</color> <!-- Light Blue Gray for text on primary -->
+
+    <!-- Teal to a softer blue-gray variant -->
+    <color name="soft_teal_200">#B2DFDB</color>  <!-- Soft Teal 200 -->
+    <color name="soft_teal_700">#00796B</color>  <!-- Soft Teal 700 -->
+    <color name="grayish_black">#212121</color>   <!-- Dark gray almost black for text on secondary -->
+</resources>

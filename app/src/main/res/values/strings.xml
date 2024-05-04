@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">MyMVVMRivhitApp</string>
+    <string name="column_number">מספר עמודות</string>
+    <string name="info_card">מידע בכרטיס</string>
+    <string name="name">שם</string>
+    <string name="cost">מחיר</string>
+    <string name="quantity">כמות</string>
+    <string-array name="radio_choices">
+        <item>Option 1</item>
+        <item>Option 2</item>
+        <item>Option 3</item>
+    </string-array>
+</resources>

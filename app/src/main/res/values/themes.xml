@@ -1,0 +1,18 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Theme.MyMVVMRivhitApp" parent="Theme.Material3.Light.NoActionBar">
+        <!-- Primary brand color. -->
+        <item name="colorPrimary">@color/blue_gray_500</item>
+        <item name="colorPrimaryVariant">@color/blue_gray_700</item>
+        <item name="colorOnPrimary">@color/blue_gray_light</item>
+        <!-- Secondary brand color. -->
+        <item name="colorSecondary">@color/soft_teal_200</item>
+        <item name="colorSecondaryVariant">@color/soft_teal_700</item>
+        <item name="colorOnSecondary">@color/grayish_black</item>
+        <!-- Status bar color. -->
+        <item name="android:statusBarColor">@color/blue_gray_700</item>
+        <!-- Customize your theme here. -->
+    </style>
+
+
+</resources>
