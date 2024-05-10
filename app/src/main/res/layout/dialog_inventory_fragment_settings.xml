@@ -6,6 +6,10 @@
         <variable
             name="viewModel"
             type="il.theguyd.mymvvmrivhitapp.viewmodel.InventorySettingsDialogViewModel" />
+
+        <variable
+            name="constants"
+            type="il.theguyd.mymvvmrivhitapp.utils.Constants" />
     </data>
 
     <LinearLayout
@@ -109,8 +113,8 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:checked="@{viewModel.infoOnCard.get(0) == true}"
-                        android:onClick="@{() -> viewModel.setInfoOnCard(0)}"
+                        android:checked="@{viewModel.getSpecificInfoOnCard(constants.SHOW_NAME).booleanValue()}"
+                        android:onCheckedChanged="@{(v,isChecked)->viewModel.setInfoOnCard(constants.SHOW_NAME,isChecked)}"
                         android:text="@string/name"
                         android:textAlignment="center" />
 
@@ -119,8 +123,8 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:checked="@{viewModel.infoOnCard.get(1) == true}"
-                        android:onClick="@{() -> viewModel.setInfoOnCard(1)}"
+                        android:checked="@{viewModel.getSpecificInfoOnCard(constants.SHOW_PRICE).booleanValue()}"
+                        android:onCheckedChanged="@{(v,isChecked)->viewModel.setInfoOnCard(constants.SHOW_PRICE,isChecked)}"
                         android:text="@string/cost"
                         android:textAlignment="center" />
 
@@ -129,8 +133,8 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:checked="@{viewModel.infoOnCard.get(2) == true}"
-                        android:onClick="@{() -> viewModel.setInfoOnCard(2)}"
+                        android:checked="@{viewModel.getSpecificInfoOnCard(constants.SHOW_QUANTITY).booleanValue()}"
+                        android:onCheckedChanged="@{(v,isChecked)->viewModel.setInfoOnCard(constants.SHOW_QUANTITY,isChecked)}"
                         android:text="@string/quantity"
                         android:textAlignment="center" />
 

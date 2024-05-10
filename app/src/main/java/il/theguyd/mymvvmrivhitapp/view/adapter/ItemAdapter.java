@@ -22,6 +22,7 @@ import java.util.ArrayList;
 
 import il.theguyd.mymvvmrivhitapp.R;
 import il.theguyd.mymvvmrivhitapp.model.objects.Item;
+import il.theguyd.mymvvmrivhitapp.utils.Constants;
 
 public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder> {
     private static final String TAG = "ItemAdapter";
@@ -44,20 +45,23 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
     }
 
     // update the ItemViewHolder based on change preferences
-    public void changeItemDetailVisibility(int index, boolean b) {
-        switch (index) {
-            case 0:
+    public void changeItemDetailVisibility(String show, boolean b) {
+        switch (show) {
+            case Constants.SHOW_NAME:
                 this.showName = b;
+                notifyDataSetChanged();
                 break;
-            case 1:
+            case Constants.SHOW_PRICE:
                 this.showCost = b;
+                notifyDataSetChanged();
                 break;
-            case 2:
+            case Constants.SHOW_QUANTITY:
                 this.showQuantity = b;
+                notifyDataSetChanged();
                 break;
 
         }
-        notifyDataSetChanged();
+
     }
 
     //creating new View holders for items in recyclerView

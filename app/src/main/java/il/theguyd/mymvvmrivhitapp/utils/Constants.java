@@ -1,8 +1,5 @@
 package il.theguyd.mymvvmrivhitapp.utils;
 
-/**
- * sensitive information was deleted - for now you cannot use this
- * **/
 
 
 public class Constants {
@@ -21,16 +18,19 @@ public class Constants {
     ////////////////////////////// settings /////////////////////////////////////////////////////////////////////////////////////////////////////////////
     public static final String SPAN_COUNT = "span_count";
     public static final String INFO_ON_CARD = "info_on_card";
+    public static final String SHOW_QUANTITY = "show_quantity";
+    public static final String SHOW_PRICE = "show_price";
+    public static final String SHOW_NAME = "show_name";
 
     public  enum ImageProportions{
         SQUARE (500 ,500),
         RECTANGLE (300,300);
 
-    private int width,height;
+        private int width,height;
         ImageProportions(int width, int height){
-        this.width=width;
-        this.height=height;
-    }
+            this.width=width;
+            this.height=height;
+        }
 
         public int getWidth() {
             return width;

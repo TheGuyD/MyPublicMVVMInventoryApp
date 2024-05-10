@@ -5,7 +5,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -18,6 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import il.theguyd.mymvvmrivhitapp.R;
 import il.theguyd.mymvvmrivhitapp.model.objects.Item;
@@ -78,28 +78,7 @@ public class InventoryFragment extends Fragment {
             }
         });
 
-        inventorySettingsDialogViewModel.getColumns().observe(this.getViewLifecycleOwner(), new Observer<Integer>() {
-            @Override
-            public void onChanged(Integer radioId) {
-                Toast.makeText(getContext(), "check " + radioId, Toast.LENGTH_SHORT).show();
-                rcContact.setLayoutManager(new GridLayoutManager(getContext(), radioId));
-                GridLayoutManager layoutManager = (GridLayoutManager) rcContact.getLayoutManager();
-                if (layoutManager != null) {
-                    layoutManager.setSpanCount(radioId);
-                    rcContact.getAdapter().notifyDataSetChanged();
-                }
-            }
-        });
-
-        inventorySettingsDialogViewModel.getInfoOnCard().observe(this.getViewLifecycleOwner(), new Observer<List<Boolean>>() {
-            @Override
-            public void onChanged(List<Boolean> booleans) {
-                for (int i = 0; i < booleans.size(); i++) {
-                    adapter.changeItemDetailVisibility(i, booleans.get(i));
-                }
-
-            }
-        });
+        setObservers();
 
         // in older apis the search view was automatically focused
         searchView.clearFocus();
@@ -120,13 +99,37 @@ public class InventoryFragment extends Fragment {
         imageButtonSearchSettings.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(getContext(), "click", Toast.LENGTH_SHORT).show();
                 InventoryFragmentSettingsDialog settingsDialog = new InventoryFragmentSettingsDialog();
                 if (getParentFragmentManager().findFragmentByTag(settingsDialog.getTag()) == null)
                     settingsDialog.show(getParentFragmentManager(), String.valueOf(imageButtonSearchSettings.getId()));
             }
         });
 
+    }
+
+    private void setObservers() {
+        //TODO: this is not generic enough
+
+        inventorySettingsDialogViewModel.getColumns().observe(this.getViewLifecycleOwner(), new Observer<Integer>() {
+            @Override
+            public void onChanged(Integer radioId) {
+                rcContact.setLayoutManager(new GridLayoutManager(getContext(), radioId));
+                GridLayoutManager layoutManager = (GridLayoutManager) rcContact.getLayoutManager();
+                if (layoutManager != null) {
+                    layoutManager.setSpanCount(radioId);
+                    rcContact.getAdapter().notifyDataSetChanged();
+                }
+            }
+        });
+
+        inventorySettingsDialogViewModel.getSpecificChange().observe(this.getViewLifecycleOwner(), new Observer<Map<String, Boolean>>() {
+            @Override
+            public void onChanged(Map<String, Boolean> stringBooleanMap) {
+                String key = stringBooleanMap.keySet().stream().findFirst().get();
+                boolean value = Boolean.TRUE.equals(stringBooleanMap.get(key));
+                adapter.changeItemDetailVisibility(key, value);
+            }
+        });
     }
 
     private void filterItems(String newText) {

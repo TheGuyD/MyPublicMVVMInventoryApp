@@ -1,15 +1,20 @@
 package il.theguyd.mymvvmrivhitapp.viewmodel;
 
 import android.app.Application;
+import android.util.Log;
+
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.SavedStateHandle;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Objects;
+
 import il.theguyd.mymvvmrivhitapp.utils.Constants;
+
 /**
  * <p><b>ViewModel</b> is designed to store and manage UI-related data in a lifecycle-conscious way. It survives configuration changes such as screen rotations,
  * meaning that data you hold inside the ViewModel will not be destroyed and re-created during these events.</p>
@@ -28,9 +33,9 @@ import il.theguyd.mymvvmrivhitapp.utils.Constants;
  * {@link } <a href="https://developer.android.com/codelabs/android-lifecycles#6">example 2</a>
  ***/
 public class InventorySettingsDialogViewModel extends AndroidViewModel {
-    public final MutableLiveData<Integer> columns;
-    public final MutableLiveData<List<Boolean>> infoOnCard;
-    public SavedStateHandle savedStateHandle;
+    private final MutableLiveData<Integer> columns;
+    private final MutableLiveData<Map<String, Boolean>> specificChange;
+    private SavedStateHandle savedStateHandle;
 
     public InventorySettingsDialogViewModel(@NonNull Application application, SavedStateHandle savedStateHandle) {
         super(application);
@@ -42,7 +47,12 @@ public class InventorySettingsDialogViewModel extends AndroidViewModel {
         columns = savedStateHandle.getLiveData(Constants.SPAN_COUNT, 2);
 
         //  Retrieve the saved value or default to all checked
-        infoOnCard = savedStateHandle.getLiveData(Constants.INFO_ON_CARD, new ArrayList<>(Arrays.asList(true, true, true)));
+        savedStateHandle.set(Constants.SHOW_NAME, true);
+        savedStateHandle.set(Constants.SHOW_PRICE, true);
+        savedStateHandle.set(Constants.SHOW_QUANTITY, true);
+
+        // save the specific change specific checkbox
+        specificChange = new MutableLiveData<>();
     }
 
     public LiveData<Integer> getColumns() {
@@ -54,19 +64,32 @@ public class InventorySettingsDialogViewModel extends AndroidViewModel {
         savedStateHandle.set(Constants.SPAN_COUNT, columns);
     }
 
-    public void setInfoOnCard(int index){
-            this.infoOnCard.getValue().set(index,!infoOnCard.getValue().get(index));
-            savedStateHandle.set(Constants.INFO_ON_CARD, this.infoOnCard.getValue());
+    public void setInfoOnCard(String info, boolean value) {
+        if (!Objects.equals(this.savedStateHandle.get(info), value)) {
+            this.savedStateHandle.set(info, value);
+            this.setSpecificChange(info, value);
+        }
     }
 
-    public LiveData<List<Boolean>> getInfoOnCard(){
-        return infoOnCard;
+    public LiveData<Boolean> getSpecificInfoOnCard(String info) {
+        LiveData<Boolean> isShow = new MutableLiveData<>();
+        try {
+            isShow = savedStateHandle.getLiveData(info);
+        } catch (Exception e) {
+            Log.d("EXCEPTION", e.toString());
+        }
+        return isShow;
     }
 
+    public void setSpecificChange(String key, boolean value) {
+        HashMap<String, Boolean> map = new HashMap<>();
+        map.put(key, value);
+        specificChange.setValue(map);
+    }
 
-
-
-
+    public LiveData<Map<String, Boolean>> getSpecificChange() {
+        return specificChange;
+    }
 
 
 }
