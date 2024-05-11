@@ -19,6 +19,7 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import il.theguyd.mymvvmrivhitapp.R;
 import il.theguyd.mymvvmrivhitapp.model.objects.Item;
@@ -36,12 +37,8 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
 
     Activity activity;
 
-    public ItemAdapter(Context context, Activity activity) {
-        this.context = context;
-        this.activity = activity;
-        this.showName = true;
-        this.showCost = true;
-        this.showQuantity = true;
+    public ItemAdapter( HashMap<String,Boolean> initMap) {
+        initMap.forEach(this::changeItemDetailVisibility);
     }
 
     // update the ItemViewHolder based on change preferences
@@ -49,18 +46,17 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
         switch (show) {
             case Constants.SHOW_NAME:
                 this.showName = b;
-                notifyDataSetChanged();
                 break;
             case Constants.SHOW_PRICE:
                 this.showCost = b;
-                notifyDataSetChanged();
                 break;
             case Constants.SHOW_QUANTITY:
                 this.showQuantity = b;
-                notifyDataSetChanged();
                 break;
-
         }
+        if(!items.isEmpty()){
+            notifyDataSetChanged();
+        };
 
     }
 
@@ -171,7 +167,6 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
             txtItemCost.setVisibility(showCost ? View.VISIBLE : View.GONE);
             txtTitleQuantity.setVisibility(showQuantity ? View.VISIBLE : View.GONE);
             txtItemQuantity.setVisibility(showQuantity ? View.VISIBLE : View.GONE);
-
         }
     }
 }

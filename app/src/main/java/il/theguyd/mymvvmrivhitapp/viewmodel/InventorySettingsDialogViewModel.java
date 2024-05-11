@@ -35,6 +35,7 @@ import il.theguyd.mymvvmrivhitapp.utils.Constants;
 public class InventorySettingsDialogViewModel extends AndroidViewModel {
     private final MutableLiveData<Integer> columns;
     private final MutableLiveData<Map<String, Boolean>> specificChange;
+    HashMap<String,Boolean> initMap = new HashMap<>();
     private SavedStateHandle savedStateHandle;
 
     public InventorySettingsDialogViewModel(@NonNull Application application, SavedStateHandle savedStateHandle) {
@@ -50,6 +51,9 @@ public class InventorySettingsDialogViewModel extends AndroidViewModel {
         savedStateHandle.set(Constants.SHOW_NAME, true);
         savedStateHandle.set(Constants.SHOW_PRICE, true);
         savedStateHandle.set(Constants.SHOW_QUANTITY, true);
+
+        // init map for visibility control on the adapter
+        updateInitMap();
 
         // save the specific change specific checkbox
         specificChange = new MutableLiveData<>();
@@ -91,5 +95,15 @@ public class InventorySettingsDialogViewModel extends AndroidViewModel {
         return specificChange;
     }
 
+    public void updateInitMap() {
+        initMap.put(Constants.SHOW_NAME, savedStateHandle.get(Constants.SHOW_NAME));
+        initMap.put(Constants.SHOW_QUANTITY, savedStateHandle.get(Constants.SHOW_QUANTITY));
+        initMap.put(Constants.SHOW_PRICE, savedStateHandle.get(Constants.SHOW_PRICE));
+    }
+
+    public HashMap<String,Boolean> getUpdateInitMap(){
+        updateInitMap();
+        return initMap;
+    }
 
 }

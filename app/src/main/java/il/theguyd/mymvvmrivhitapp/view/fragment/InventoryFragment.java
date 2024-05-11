@@ -66,7 +66,8 @@ public class InventoryFragment extends Fragment {
         searchView = view.findViewById(R.id.searchView);
         imageButtonSearchSettings = view.findViewById(R.id.imgBtnSearchSettings);
         rcContact.setLayoutManager(new GridLayoutManager(this.getContext(), 2));
-        adapter = new ItemAdapter(this.getContext(), this.getActivity());
+
+        adapter = new ItemAdapter(inventorySettingsDialogViewModel.getUpdateInitMap());
         rcContact.setAdapter(adapter);
 
         viewModel.getObservableAllItems().observe(getViewLifecycleOwner(), new Observer<List<Item>>() {
